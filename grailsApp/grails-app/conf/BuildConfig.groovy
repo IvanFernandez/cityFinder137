@@ -38,6 +38,7 @@ grails.project.dependency.resolution = {
 			excludes([ group: 'xerces'])
 		}
 		compile(group:'xerces', name:'xercesImpl', version:'2.9.1') { transitive = false }
+		compile(group:'net.sf.json-lib', name:'json-lib', version:'2.4')
 	}
 
 	plugins {
