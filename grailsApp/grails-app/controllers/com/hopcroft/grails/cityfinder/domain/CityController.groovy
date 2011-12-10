@@ -3,6 +3,7 @@ package com.hopcroft.grails.cityfinder.domain
 import grails.converters.JSON
 import net.sf.json.groovy.JsonSlurper
 import grails.converters.*;
+import java.text.SimpleDateFormat
 
 
 class CityController {
@@ -12,7 +13,7 @@ class CityController {
 	def info =  {
 		// Get woeid
 		def cityInstance = City.get(params.id)
-		println cityInstance
+//		println cityInstance
 		def cityEncoded = URLEncoder.encode(cityInstance.name)
 		//println cityEncoded
 		def appid = "foOF4CzV34EFIIW4gz1lx0Ze1em._w1An3QyivRalpXCK9sIXT5de810JWold3ApkdMdCrc-%22"
@@ -38,7 +39,7 @@ class CityController {
 		//println rss_news.rss.channel
 		def lnews = []
 		rss_news.channel.item.each {
-			println "Titulo del item: " + it.title
+//			println "Titulo del item: " + it.title
 			lnews << it
 		}
 		//wikipedia.
@@ -78,7 +79,7 @@ class CityController {
 //		Event evt = new Event()
 //		bindData(evt, parsedList[0]);
 //		print "EVT: " + evt
-		
+		long ii = 0
 		yahoo_events.query.results.event.each {
 			Event event = new Event()
 			//TODO: hacer un html m‡s estŽtico
@@ -92,19 +93,34 @@ class CityController {
 		
 //		println "Eventful"
 		// eventos de eventful
-		def url_eventful = "http://api.eventful.com/rest/events/search?app_key=gGZgS7gdjk2nnXKr&location=" + cityEncoded + "&date=Future&page_size=50"
+		def url_eventful = "http://api.eventful.com/rest/events/search?app_key=gGZgS7gdjk2nnXKr&location=" + cityEncoded + "&date=Future&page_size=90&sort_order=relevance&category=music"
+//		println url_eventful
 		def url_eventful_text = url_eventful.toURL().text
-		//println "url_eventful_text" + url_eventful_text
+//		println "url_eventful_text" + url_eventful_text
 		def eventful = new XmlSlurper().parseText(url_eventful_text)
-//		println "EVFUL" + eventful
+//	println "EVFUL" + eventful
 		eventful.events.event.each {
 //			println it
 			Event event = new Event()
 			//TODO: hacer un html m‡s estŽtico
-			event.html = it.title + '\n'
+			def html = it.title.toString() + " - Venue " + it.venue_name.toString()
+			event.html = html
 //			event.html += "<img src=\"" + it.photo_url + "\"/>"
 			event.latitude = it.latitude
 			event.longitude = it.longitude
+			event.title = it.title + " - Venue " + it.venue_name
+//			def com = it.start_time
+//			println "COM: " + com
+//			def comienzo = new Date()
+//			println "CCCC: " + comienzo
+//			def datee = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(com.toString())
+//			def datte2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(datee)
+//			println "DATE " + datte2
+//			println "DATE2 " + datee
+			event.start = it.start_time.toString()
+			event.end = it.stop_time.toString()	
+			event.allDay = false
+			event.id = ii++
 			events << event
 //			println "Event: " + event.html
 		}
@@ -120,6 +136,7 @@ class CityController {
 		
 		
 		def json_events = (events as JSON).toString()
+		def my_events = events as JSON
 //		println "Eventos json: " + json_events
 //		def mi_json = yahoo_events_text as JSON
 		//def y = yahoo_events_text.substring(0, yahoo_events_text.length()-30)
@@ -136,7 +153,8 @@ class CityController {
 		if (list.size() > 0) {
 			def dirtyCode = list.last()
 			def code = dirtyCode.tokenize("_").first()
-			println code
+//			println code
+			flash.my_events = my_events
 			flash.events = json_events
 			flash.code = code
 			flash.lnews = lnews
