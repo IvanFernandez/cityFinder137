@@ -27,15 +27,22 @@
 
 #calendar {
 	width: 900px;
-	height: 100%;
-	<%--
+	height: 100%; <%--
 	position: relative; --%>
 	margin: 0 auto;
 }
 fc-view
+
+
  
+
+
 fc-view-month
+
+
  
+
+
 fc-grid
 </style>
 
@@ -100,8 +107,6 @@ var options =
 	    latitude:               ${flash.latitude},
 	    longitude:              ${flash.longitude},
 	    zoom:                   11,
-<%--	    markers:                [{latitude: 47.670553, longitude: 9.588479, html: "Tettnang, Germany"},--%>
-<%--	                             {latitude: 47.65197522925437, longitude: 9.47845458984375, html: "Friedrichshafen, Germany"}],--%>
 	    markers: ${flash.events},
 	    controls:               ["GSmallMapControl", "GMapTypeControl"],
 	    scrollwheel:            false,
@@ -121,7 +126,7 @@ var options =
 $(document).ready(function () {
   $("#map").gMap(options);
   $('#tabs').tabs();
-  $('#weather').weatherfeed(['${flash.code}']);
+  $('#weather').weatherfeed(['${flash.weatherCode}']);
 <%--  $('#gmap').GoogleMap(aLocations, aTitles, aSummary, {--%>
 <%--	  type: 3,--%>
 <%--	  zoom: 9--%>
@@ -138,10 +143,6 @@ $(document).ready(function () {
 	  	description: 'true'
 	  }
 	});
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
 
 	$('#calendar').fullCalendar({
 		firstDay: 1,
@@ -151,53 +152,7 @@ $(document).ready(function () {
 			right: 'month,agendaWeek,agendaDay'
 		},
 		editable: true,
-		events: ${flash.my_events}
-<%--			[--%>
-<%--			{--%>
-<%--				title: 'All Day Event',--%>
-<%--				start: new Date(y, m, 1)--%>
-<%--			},--%>
-<%--			{--%>
-<%--				title: 'Long Event',--%>
-<%--				start: new Date(y, m, d-5),--%>
-<%--				end: new Date(y, m, d-2)--%>
-<%--			},--%>
-<%--			{--%>
-<%--				id: 999,--%>
-<%--				title: 'Repeating Event',--%>
-<%--				start: new Date(y, m, d-3, 16, 0),--%>
-<%--				allDay: false--%>
-<%--			},--%>
-<%--			{--%>
-<%--				id: 999,--%>
-<%--				title: 'Repeating Event',--%>
-<%--				start: new Date(y, m, d+4, 16, 0),--%>
-<%--				allDay: false--%>
-<%--			},--%>
-<%--			{--%>
-<%--				title: 'Meeting',--%>
-<%--				start: new Date(y, m, d, 10, 30),--%>
-<%--				allDay: false--%>
-<%--			},--%>
-<%--			{--%>
-<%--				title: 'Lunch',--%>
-<%--				start: new Date(y, m, d, 12, 0),--%>
-<%--				end: new Date(y, m, d, 14, 0),--%>
-<%--				allDay: false--%>
-<%--			},--%>
-<%--			{--%>
-<%--				title: 'Birthday Party',--%>
-<%--				start: new Date(y, m, d+1, 19, 0),--%>
-<%--				end: new Date(y, m, d+1, 22, 30),--%>
-<%--				allDay: false--%>
-<%--			},--%>
-<%--			{--%>
-<%--				title: 'Click for Google',--%>
-<%--				start: new Date(y, m, 28),--%>
-<%--				end: new Date(y, m, 29),--%>
-<%--				url: 'http://google.com/'--%>
-<%--			}--%>
-<%--		]--%>
+		events: ${flash.events}
 	});
 
 
@@ -222,8 +177,8 @@ $(document).ready(function () {
 			<li><a href="#tabs-5"><g:message
 						code="default.tab.calendar.name" default="Calendar" /></a></li>
 			<li><g:message code="default.info.code.label"
-					args="[cityInstance.name,flash.code]"
-					default="Information about ${cityInstance.name} with code ${flash.code}" />
+					args="[cityInstance.name,flash.woeid]"
+					default="Information about ${cityInstance.name} with code ${flash.woeid}" />
 			</li>
 		</ul>
 		<div id="tabs-1">
@@ -232,19 +187,30 @@ $(document).ready(function () {
 				<%--				<div id="gmap" style="float: right;"></div>--%>
 			</div>
 			<div id="galleria" style="margin-top: 20px;"></div>
-			<div id='calendar'></div>
+			<g:if test="${!flash.isEmptyEvents}">
+				<div id='calendar'></div>
+			</g:if>
+			<g:else>
+				<g:message code="default.info.noevents" args="[cityInstance.name]"
+					default="There are no events in ${cityInstance.name}" />
+			</g:else>
 
 		</div>
 		<div id="tabs-2">
-			<g:each var="news" in="${flash.lnews}">
-				<p>
-					${news.title}
-				</p>
-				<p>
-					${news.description}
-				</p>
-			</g:each>
-
+			<g:if test="${flash.googleNews != null}">
+				<g:each var="news" in="${flash.googleNews}">
+					<p>
+						${news.title}
+					</p>
+					<p>
+						${news.description}
+					</p>
+				</g:each>
+			</g:if>
+			<g:else>
+				<g:message code="default.info.nonews" args="[cityInstance.name]"
+					default="There are no news in ${cityInstance.name}" />
+			</g:else>
 		</div>
 
 		<div id="tabs-3">
@@ -253,7 +219,8 @@ $(document).ready(function () {
 		</div>
 		<div id="tabs-4">
 			<div id="map"
-				style="width: 547px; height: 320px; border: 1px solid #777; overflow: hidden;"></div>
+				style="width: 100%; height: 500px; border: 1px solid #777; overflow: hidden;"></div>
+
 			<div class="eventful-badge eventful-small">
 				<img src="http://api.eventful.com/images/powered/eventful_58x20.gif"
 					alt="Local Events, Concerts, Tickets">
@@ -266,17 +233,14 @@ $(document).ready(function () {
 			</div>
 
 		</div>
-		<div id="tabs-5">
-
-			<div id='calendar'></div>
-		</div>
+		<div id="tabs-5"></div>
 
 	</div>
 
-	<a href="/cityFinder/city/list"><g:message code="default.backtolist.name"
-			default="Back to city list" /></a>
-<%--	<a href="/city/list"><g:message code="default.backtolist.name"--%>
-<%--			default="Back to city list" /></a>--%>
+<%--	<a href="/cityFinder/city/list"><g:message--%>
+<%--			code="default.backtolist.name" default="Back to city list" /></a>--%>
+		<a href="/city/list"><g:message code="default.backtolist.name"
+				default="Back to city list" /></a>
 
 
 	<div class="body"></div>
