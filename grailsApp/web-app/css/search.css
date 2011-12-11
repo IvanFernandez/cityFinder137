@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+/******* GENERAL RESET *******/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+ tfoot, thead, tr, th, td {
+border:0pt none;
+font-family:inherit;
+font-size: 100%;
+font-style:inherit;
+font-weight:inherit;
+margin:0pt;
+padding:0pt;
+vertical-align:baseline;
+}
+body{
+	background: #fff;
+	line-height:14px;
+	font-size: 12px;
+	font-family: Arial,  Verdana, Helvetica, sans-serif;
+	margin:0pt;
+	cursor:default;
+	overflow: hidden;
+}
+html,body{
+	height:100%;
+	text-align: center;
+}
+.clear{
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	display: block;
+}
+a{
+	text-decoration: none;
+}
+strong{
+	font-weight: 700;
+}
+/******* GENERAL RESET *******/
+h1{
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 2em;
+}
+/******* LOGO *******/
+#logo{
+	margin-top: 1em;
+	display: block;
+}
+/******* /LOGO  *******/
+/******* FORM *******/
+.form{
+	margin: 5em auto 3em;
+	width: 300px;
+}
+.form table{
+	margin-bottom: 2em;
+}
+.form table td{
+	text-align: left;
+	font-size: 11px;
+	vertical-align: top;
+}
+.form input{
+	border: 1px solid #d0ccc9;
+	background: #fff;
+	color: #5f95ef;
+	font-size: 11px;
+	font-weight: 700;
+	padding-bottom: 2px;
+}
+.form input.text{
+	font-weight: normal;
+	color: #565656;
+	border: 1px solid #9c9c9c;
+	width: 250px;
+	padding: 2px;
+	margin-bottom: 5px;
+	text-align: left;
+}
+.form input.text.active{
+	background: #ddeff6;
+	border: 1px solid #0099d4;
+}
+/******* /FORM *******/

@@ -11,9 +11,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title><g:layoutTitle default="Grails" /></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon"
-	href="${resource(dir: 'images', file: 'favicon.ico')}"
-	type="image/x-icon">
+<%--<link rel="shortcut icon"--%>
+<%--	href="${resource(dir: 'images', file: 'favicon.ico')}"--%>
+<%--	type="image/x-icon">--%>
 <link rel="apple-touch-icon"
 	href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -30,17 +30,22 @@
 <r:layoutResources />
 </head>
 <body>
-	<div id="grailsLogo" role="banner">
-		<a href="http://grails.org"><img
-			src="${resource(dir: 'images', file: 'grails_logo.png')}"
-			alt="Grails" /></a>
-	</div>
+<%--	<div id="grailsLogo" role="banner">--%>
+<%--		<a href="http://grails.org"><img--%>
+<%--			src="${resource(dir: 'images', file: 'grails_logo.png')}"--%>
+<%--			alt="Grails" /></a>--%>
+<%--	</div>--%>
+
 	<g:layoutBody />
-	<div class="footer" role="contentinfo"></div>
-	<div id="spinner" class="spinner" style="display: none;">
-		<g:message code="spinner.alt" default="Loading&hellip;" />
+	<div class="footer" role="content">
+			<a href="http://twitter.com/ivanfdezperea"><img
+			src="http://a0.twimg.com/a/1323449606/images/logos/twitter_newbird_white.png"
+			alt="@ivanfdezperea" style="width: 50px;height: 50px;" align="right"/></a>
 	</div>
-	<g:javascript library="application" />
+<%--	<div id="spinner" class="spinner" style="display: none;">--%>
+<%--		<g:message code="spinner.alt" default="Loading&hellip;" />--%>
+	</div>
+<%--	<g:javascript library="application" />--%>
 	<r:layoutResources />
 </body>
 </html>

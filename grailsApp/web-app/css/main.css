@@ -104,13 +104,13 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #1783BF;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
 	margin-top: 1.5em;
 	padding: 1em;
-	min-height: 1em;
+	min-height: 3em;
 }
 
 .footer a {

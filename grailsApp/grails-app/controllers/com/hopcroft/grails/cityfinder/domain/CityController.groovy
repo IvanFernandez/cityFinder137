@@ -12,39 +12,71 @@ class CityController {
 	def locationService
 	def newsService
 	def eventService
-	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	static allowedMethods = [save: "POST", update: "POST", delete: "POST", info: "POST"]
 
 	def info =  {
-		def cityInstance = City.get(params.id)
-		def encodedCity = URLEncoder.encode(cityInstance.name)
-
-		// Location
-		def locationInformation = locationService.getCityInfo(encodedCity)
-		def woeid = locationInformation.place.woeid  // size 0 si no se encuentra
-		println "woeid.size(): " + woeid.size()
-		if (woeid.size() > 0) {
-			flash.latitude = locationInformation.place.centroid.latitude
-			flash.longitude = locationInformation.place.centroid.longitude
-			// Yahoo Weather
-			def weatherCode = weatherService.getCityWeatherCode(woeid.toString()); // vacio si error
-
-			//Google News.
-			def googleNews = newsService.getGoogleNews(encodedCity) // size = 0 si error
-
-			//Yahoo and eventful events.
-			def List<Event> events = eventService.getYahooEvents(woeid.toString(), null)
-			events += eventService.getEventfulEvents(encodedCity, null)
-			def jsonEvents = events as JSON
-			flash.woeid = woeid
-			flash.isEmptyEvents = events.isEmpty()
-			flash.events = jsonEvents
-			flash.weatherCode = weatherCode
-			flash.googleNews = googleNews
-			render(view: "info", model: [cityInstance: cityInstance])
-			return
+		println "entro " + params
+		//		def cityInstance = City.get(params.id)
+		//		def encodedCity = URLEncoder.encode(cityInstance.name)
+		def city = params.city
+		if (city.size() > 0) {
+			def encodedCity = URLEncoder.encode(city)
+			// Location
+			def locationInformation = locationService.getCityInfo(encodedCity)
+			def woeid = locationInformation.place.woeid  // size 0 si no se encuentra
+			println "woeid.size(): " + woeid.size()
+			def all = params.all
+			def weather = params.weather
+			def news = params.news
+			def cevents = params.events
+			if (woeid.size() > 0 && (all != null || (weather != null ||news != null || cevents != null))) {
+				def weatherCode
+				def googleNews
+				def List<Event> events
+				def jsonEvents
+				flash.latitude = locationInformation.place.centroid.latitude
+				flash.longitude = locationInformation.place.centroid.longitude
+				// Yahoo Weather
+				if ( weather != null || all != null) {
+					weatherCode = weatherService.getCityWeatherCode(woeid.toString()); // vacio si error
+				}
+				//Google News.
+				if (news != null || all != null) {
+					googleNews = newsService.getGoogleNews(encodedCity) // size = 0 si error
+				}
+				//Yahoo and eventful events.
+				if (cevents != null || all != null) {
+					events = eventService.getYahooEvents(woeid.toString(), null)
+					events += eventService.getEventfulEvents(encodedCity, null)
+				}
+				if (events != null) {
+					jsonEvents = events as JSON
+				}
+				else {
+					jsonEvents = [] as JSON
+				}
+				println jsonEvents
+				flash.woeid = woeid
+				if (events != null) {
+					flash.isEmptyEvents = false
+				}
+				else {
+					flash.isEmptyEvents = true
+				}
+				flash.events = jsonEvents
+				flash.weatherCode = weatherCode
+				flash.googleNews = googleNews
+				flash.city = city
+				render(view: "info")
+				return
+			}
+			else {
+				redirect(url:"/")
+			}
 		}
 		else {
-			redirect(action: "list")
+				redirect(url:"/")
+//				redirect(url:"/cityFinder")			
 		}
 	}
 

@@ -1,120 +1,198 @@
 <!doctype html>
 <html>
-	<head>
-		<meta name="layout" content="main"/>
-		<title>Bienvenidos a cityFinder</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
+<head>
+<meta name="layout" content="main" />
+<title>Bienvenidos a cityFinder</title>
 
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
 
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
+<style type="text/css" media="screen">
+* {
+	padding: 0;
+	margin: 0;
+}
 
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
+body {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
 
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
+span.reference {
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	font-size: 11px;
+}
 
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
+span.reference a {
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 #000;
+}
 
-			p {
-				margin: 0.25em 0;
-			}
+span.reference a:hover {
+	color: #f0f0f0;
+}
 
-			#controller-list ul {
-				list-style-position: inside;
-			}
+.box {
+	margin: auto 0;
+	height: 450px;
+	width: 100%;
+	position: relative;
+	-moz-box-shadow: 0px 0px 5px #444;
+	-webkit-box-shadow: 0px 0px 5px #444;
+	box-shadow: 0px 0px 5px #444;
+	background: #1783BF url(/images/search/click.png) no-repeat 380px 80px;
+}
 
-			#controller-list li {
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
+.box h2 {
+	background-color: #1275AD;
+	border-color: #0E5A85 #0E5A85 #0E5A85;
+	border-style: ridge ridge solid;
+	border-width: 1px;
+	color: #FFFFFF;
+	font-size: 22px;
+	padding: 10px;
+	text-shadow: 1px 1px 1px #000000;
+}
 
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
+div.tip {
+<%--	background-color: #1275AD;--%>
+<%--	border-color: #0E5A85 #0E5A85 #0E5A85;--%>
+<%--	border-style: ridge ridge solid;--%>
+	border-width: 1px;
+	color: #FFFFFF;
+	font-size: 15px;
+	padding: 10px;
+	text-shadow: 1px 1px 1px #000000;
+}
+</style>
+<%--<link rel="stylesheet" href="css/search.css" type="text/css"--%>
+<%--	media="screen" />--%>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<link
+	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+	rel="stylesheet" type="text/css"></link>
+<script type="text/javascript" src="js/search/searchbox.js"></script>
+<link rel="stylesheet" href="css/search/searchBoxStyle.css"
+	type="text/css" media="screen" />
 
-				#page-body {
-					margin: 0 1em 1em;
-				}
 
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-<%--	<div id="status" role="complementary">--%>
-		<%--			<h1>Application Status</h1>--%>
-		<%--			<ul>--%>
-		<%--				<li>App version: <g:meta name="app.version"/></li>--%>
-		<%--				<li>Grails version: <g:meta name="app.grails.version"/></li>--%>
-		<%--				<li>Groovy version: ${org.codehaus.groovy.runtime.InvokerHelper.getVersion()}</li>--%>
-		<%--				<li>JVM version: ${System.getProperty('java.version')}</li>--%>
-		<%--				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>--%>
-		<%--				<li>Domains: ${grailsApplication.domainClasses.size()}</li>--%>
-		<%--				<li>Services: ${grailsApplication.serviceClasses.size()}</li>--%>
-		<%--				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>--%>
-		<%--			</ul>--%>
-		<%--			<h1>Installed Plugins</h1>--%>
-		<%--			<ul>--%>
-		<%--				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">--%>
-		<%--					<li>${plugin.name} - ${plugin.version}</li>--%>
-		<%--				</g:each>--%>
-		<%--			</ul>--%>
-<%--</div>--%>
-		<div id="page-body" role="main">
-			<h1>
-				Bienvenidos a
-				<g:meta name="app.name" />
-			</h1>
-			<p></p>
+</head>
+<body>
+	<div class="content">
 
-			<div id="controller-list" role="navigation">
-				<h2>Lista de servicios disponibles:</h2>
-				<ul>
-					<g:each var="c"
-						in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link
-								controller="${c.logicalPropertyName}">Ir a ${c.naturalName}
-							</g:link></li>
-						<g:if test="equals()"></g:if>
-					</g:each>
+		<div class="box">
+			<h2>CityFinder</h2>
+			<div id="tip" class="tip">Write a city name in the search box below</div>
+
+			<form id="ui_element" action="city/info" method="POST"
+				class="sb_wrapper">
+
+				<p>
+					<span class="sb_down"> </span> <input class="sb_input" type="text"
+						name="city" id="city" /> <input class="sb_search" type="submit"
+						value="" />
+				</p>
+
+				<ul id="list" class="sb_dropdown" style="display: none;">
+					<li class="sb_filter">Filter your search</li>
+					<li><input id="all" name="all" type="checkbox" /><label
+						for="all"><strong>All Categories</strong></label></li>
+					<li><input id="weather" name="weather" type="checkbox" /><label
+						for="Weather">Weather</label></li>
+					<li><input id="news" name="news" type="checkbox" /><label
+						for="News">News</label></li>
+					<li><input id="photos" name="photos" type="checkbox" /><label
+						for="Photos">Photos</label></li>
+					<li><input id="events" name="events" type="checkbox" /><label
+						for="Events">Events</label></li>
 				</ul>
-			</div>
+			</form>
 		</div>
+	</div>
+
+
+
+	<!-- The JavaScript -->
+
+	<%--	<script type="text/javascript"--%>
+	<%--		src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>--%>
+
+	<script type="text/javascript">
+            $(function() {
+				/**
+				* the element
+				*/
+				var $ui 		= $('#ui_element');
+				/**
+				* on focus and on click display the dropdown, 
+				* and change the arrow image
+				*/
+
+				$ui.find('.sb_input').bind('focus click',function(){
+
+					$ui.find('.sb_down')
+
+					   .addClass('sb_up')
+
+					   .removeClass('sb_down')
+
+					   .andSelf()
+
+					   .find('.sb_dropdown')
+
+					   .show();
+
+				});
+
+				
+
+				/**
+
+				* on mouse leave hide the dropdown, 
+
+				* and change the arrow image
+
+				*/
+
+				$ui.bind('mouseleave',function(){
+
+					$ui.find('.sb_up')
+
+					   .addClass('sb_down')
+
+					   .removeClass('sb_up')
+
+					   .andSelf()
+
+					   .find('.sb_dropdown')
+
+					   .hide();
+
+				});
+
+				
+
+				/**
+
+				* selecting all checkboxes
+
+				*/
+
+				$ui.find('.sb_dropdown').find('label[for="all"]').prev().bind('click',function(){
+
+					$(this).parent().siblings().find(':checkbox').attr('checked',this.checked).attr('disabled',this.checked);
+
+				});
+
+            });
+
+        </script>
+
+
 
 </body>
 </html>

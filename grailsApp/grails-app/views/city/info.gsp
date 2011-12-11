@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta name="layout" content="main" />
 <title>
-	${cityInstance.name} info
+	${flash.city} info
 </title>
 
 <style type="text/css">
@@ -31,75 +31,75 @@
 	position: relative; --%>
 	margin: 0 auto;
 }
-fc-view
-
-
- 
-
-
-fc-view-month
-
-
- 
-
-
-fc-grid
 </style>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<link
+	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+	rel="stylesheet" type="text/css"></link>
 
-<link href="../../css/jquery.zweatherfeed.css" rel="stylesheet"
-	type="text/css" />
-<link href="../../css/jquery.zgooglemap.css" rel="stylesheet"
-	type="text/css" />
-<link href="../../css/jquery.zflickrfeed.css" rel="stylesheet"
-	type="text/css" />
+
+<link rel="stylesheet"
+	href="${resource(dir: 'css', file:'jquery.zweatherfeed.css')}"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="${resource(dir: 'css', file:'jquery.zflickrfeed.css')}"
+	type="text/css"></link>
+<script src="${resource(dir: 'js', file:'jquery.zweatherfeed.min.js')}"
+	type="text/javascript"></script>
+<script src="${resource(dir: 'js', file:'jquery.zflickrfeed.min.js')}"
+	type="text/javascript"></script>
+
+
+<script
+	src="${resource(dir: 'js/galleria', file:'galleria-1.2.5.min.js')}"
+	type="text/javascript"></script>
+<script
+	src="${resource(dir: 'js/galleria/plugins/flickr/', file:'galleria.flickr.min.js')}"
+	type="text/javascript"></script>
 <link rel="stylesheet"
 	href="${resource(dir: 'css/galleria/themes/classic', file:'galleria.classic.css')}"
 	type="text/css">
 
 
-<link
-	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
-	rel="stylesheet" type="text/css" />
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-<script src="../../js/jquery.zweatherfeed.min.js" type="text/javascript"></script>
-<%--<script src="http://maps.google.com/maps/api/js?sensor=false&region=ES"--%>
-<%--	type="text/javascript"></script>--%>
-<%--<script src="../../js/jquery.zgooglemap.min.js" type="text/javascript"></script>--%>
-<script src="../../js/jquery.zflickrfeed.min.js" type="text/javascript"></script>
-<script src="../../js/galleria/galleria-1.2.5.min.js"></script>
-<script src="../../js/galleria/plugins/flickr/galleria.flickr.min.js"></script>
 
 <script type="text/javascript"
 	src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAARwAQmI-wgFQ47AJ0-t5D-RSHIYQK0rWx9IE2QxXCr1QnppSkHBQiIyWzGtiGBiNpWY92_84WsBCZRg"></script>
-<script type="text/javascript" src="../../js/jquery.gmap-1.1.0-min.js"></script>
+<script src="${resource(dir: 'js', file:'jquery.gmap-1.1.0-min.js')}"
+	type="text/javascript"></script>
 
-<link rel='stylesheet' type='text/css'
-	href='../../js/fullcalendar/fullcalendar.css' />
-<link rel='stylesheet' type='text/css'
-	href='../../js/fullcalendar/fullcalendar.print.css' media='print' />
-<script type='text/javascript'
-	src='../../js/jquery-ui-1.8.11.custom.min.js'></script>
-<script type='text/javascript'
-	src='../../js/fullcalendar/fullcalendar.min.js'></script>
+
+<link rel="stylesheet"
+	href="${resource(dir: 'js/fullcalendar', file:'fullcalendar.css')}"
+	type="text/css">
+<%--<link rel="stylesheet"--%>
+<%--	href="${resource(dir: 'js/fullcalendar', file:'fullcalendar.print.css')}"--%>
+<%--	type="text/css">--%>
+<script
+	src="${resource(dir: 'js', file:'jquery-ui-1.8.11.custom.min.js')}"
+	type="text/javascript"></script>
+<script
+	src="${resource(dir: 'js/fullcalendar', file:'fullcalendar.min.js')}"
+	type="text/javascript"></script>
+
 
 <script>
-var aLocations = new Array();
-var aTitles = new Array();
-var aDetails = new Array();
-
-
-aLocations = [
-'${cityInstance.name},${cityInstance.name},${cityInstance.country}'
-];
-aTitles = [
-'${cityInstance.name}'
-];
-aSummary = [
-'<h3>${cityInstance.name}</h3><p>${cityInstance.name} is a city of ${cityInstance.country}...</p>'
-]; 
+<%--var aLocations = new Array();--%>
+<%--var aTitles = new Array();--%>
+<%--var aDetails = new Array();--%>
+<%----%>
+<%----%>
+<%--aLocations = [--%>
+<%--'${cityInstance.name},${cityInstance.name},${cityInstance.country}'--%>
+<%--];--%>
+<%--aTitles = [--%>
+<%--'${cityInstance.name}'--%>
+<%--];--%>
+<%--aSummary = [--%>
+<%--'<h3>${cityInstance.name}</h3><p>${cityInstance.name} is a city of ${cityInstance.country}...</p>'--%>
+<%--]; --%>
 
 
 var options = 
@@ -107,7 +107,7 @@ var options =
 	    latitude:               ${flash.latitude},
 	    longitude:              ${flash.longitude},
 	    zoom:                   11,
-	    markers: ${flash.events},
+	    markers: 				${flash.events},
 	    controls:               ["GSmallMapControl", "GMapTypeControl"],
 	    scrollwheel:            false,
 	    maptype:                G_NORMAL_MAP,
@@ -115,7 +115,7 @@ var options =
 	    html_append:            '</div>',
 	    icon:
 	    {
-	        image:              "../../images/blue_flag.png",
+	        image:              "${resource(dir: 'images', file:'blue_flag.png')}",
 	        shadow:             false,
 	        iconsize:           [19, 21],
 	        shadowsize:         false,
@@ -127,23 +127,18 @@ $(document).ready(function () {
   $("#map").gMap(options);
   $('#tabs').tabs();
   $('#weather').weatherfeed(['${flash.weatherCode}']);
-<%--  $('#gmap').GoogleMap(aLocations, aTitles, aSummary, {--%>
-<%--	  type: 3,--%>
-<%--	  zoom: 9--%>
-<%--	});--%>
-  $('#flicker').flickrfeed('','${cityInstance.name}', {
+  $('#flicker').flickrfeed('','${flash.city}', {
 	    limit: 5
 	  });
-  Galleria.loadTheme('../../css/galleria/themes/classic/galleria.classic.min.js');
+  Galleria.loadTheme("${resource(dir: 'css/galleria/themes/classic', file:'galleria.classic.min.js')}");
   $('#galleria').galleria({
       height: 500,
-	  flickr: 'search:${cityInstance.name}',
+	  flickr: 'search:${flash.city}',
 	  flickrOptions: {
 	  	sort: 'relevance',
 	  	description: 'true'
 	  }
 	});
-
 	$('#calendar').fullCalendar({
 		firstDay: 1,
 		header: {
@@ -154,8 +149,6 @@ $(document).ready(function () {
 		editable: true,
 		events: ${flash.events}
 	});
-
-
 });
 
 
@@ -177,10 +170,11 @@ $(document).ready(function () {
 			<li><a href="#tabs-5"><g:message
 						code="default.tab.calendar.name" default="Calendar" /></a></li>
 			<li><g:message code="default.info.code.label"
-					args="[cityInstance.name,flash.woeid]"
-					default="Information about ${cityInstance.name} with code ${flash.woeid}" />
+					args="[flash.city,flash.woeid]"
+					default="Information about ${flash.city} with code ${flash.woeid}" />
 			</li>
 		</ul>
+
 		<div id="tabs-1">
 			<div id="cabecera" style="margin-bottom: 20px;">
 				<div id="weather" style="float: left; margin: 0px; width: 250px;"></div>
@@ -191,8 +185,8 @@ $(document).ready(function () {
 				<div id='calendar'></div>
 			</g:if>
 			<g:else>
-				<g:message code="default.info.noevents" args="[cityInstance.name]"
-					default="There are no events in ${cityInstance.name}" />
+				<g:message code="default.info.noevents" args="[flash.city]"
+					default="There are no events in ${flash.city}" />
 			</g:else>
 
 		</div>
@@ -208,8 +202,8 @@ $(document).ready(function () {
 				</g:each>
 			</g:if>
 			<g:else>
-				<g:message code="default.info.nonews" args="[cityInstance.name]"
-					default="There are no news in ${cityInstance.name}" />
+				<g:message code="default.info.nonews" args="[flash.city]"
+					default="There are no news in ${flash.ctiy}" />
 			</g:else>
 		</div>
 
@@ -218,8 +212,16 @@ $(document).ready(function () {
 
 		</div>
 		<div id="tabs-4">
-			<div id="map"
-				style="width: 100%; height: 500px; border: 1px solid #777; overflow: hidden;"></div>
+
+			<g:if test="${!flash.isEmptyEvents}">
+				<div id="map"
+					style="width: 100%; height: 500px; border: 1px solid #777; overflow: hidden;"></div>
+			</g:if>
+			<g:else>
+				<g:message code="default.info.noevents" args="[flash.city]"
+					default="There are no events in ${flash.city}" />
+			</g:else>
+
 
 			<div class="eventful-badge eventful-small">
 				<img src="http://api.eventful.com/images/powered/eventful_58x20.gif"
@@ -228,21 +230,16 @@ $(document).ready(function () {
 					<a href="http://eventful.com/">Events</a> by Eventful
 				</p>
 			</div>
-			<div id="wikipedia">
-				<%--		pefsdfqueño cambio	${flash.wikipedia}--%>
-			</div>
 
 		</div>
 		<div id="tabs-5"></div>
 
 	</div>
 
-<%--	<a href="/cityFinder/city/list"><g:message--%>
-<%--			code="default.backtolist.name" default="Back to city list" /></a>--%>
-		<a href="/city/list"><g:message code="default.backtolist.name"
-				default="Back to city list" /></a>
-
-
-	<div class="body"></div>
+	<%--		<a href="/cityFinder/city/list"><g:message--%>
+	<%--				code="default.backtolist.name" default="Back to city list" /></a>--%>
+	<a href="/"><g:message code="default.backtolist.name"
+			default="Back to search city" /></a>
+	<div id="body"></div>
 </body>
 </html>
